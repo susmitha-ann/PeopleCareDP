@@ -1,0 +1,35 @@
+<!--Scenario 7: Convert Data to JSON Format, Imagine a 7th scenario requiring the exploration of part of this data in JSON format and write a stylesheet for this-->
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+    <!-- Output method is text for JSON compatibility -->
+    <xsl:output method="text"/>
+    <!-- Root template -->
+    <xsl:template match="/">
+        {
+        "Platform": {
+            "Services": [
+                <!-- Loop through each Service element -->
+                <xsl:for-each select="Platform/Service">
+                {
+                    "ServiceID": "<xsl:value-of select='ServiceID'/>",
+                    "ServiceName": "<xsl:value-of select='ServiceName'/>",
+                    "Description": "<xsl:value-of select='Description'/>",
+                    "Provider": {
+                        "ProviderID": "<xsl:value-of select='Provider/ProviderID'/>",
+                        "ProviderName": "<xsl:value-of select='Provider/ProviderName'/>",
+                        "Contact": {
+                            "Phone": "<xsl:value-of select='Provider/Contact/Phone'/>",
+                            "Email": "<xsl:value-of select='Provider/Contact/Email'/>"
+                        }
+                    },
+                    "Schedule": {
+                        "Date": "<xsl:value-of select='Schedule/Date'/>",
+                        "Time": "<xsl:value-of select='Schedule/Time'/>",
+                        "Duration": "<xsl:value-of select='Schedule/Duration'/>"
+                    }
+                }<xsl:if test='position() != last()'>,</xsl:if>
+                </xsl:for-each>
+            ]
+        }
+        }
+    </xsl:template>
+</xsl:stylesheet>
