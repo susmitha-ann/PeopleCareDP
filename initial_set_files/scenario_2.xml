@@ -1,0 +1,18 @@
+<!--Scenario 2: List of Persons Needing Home Care-->
+
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+    <xsl:template match="/">
+        <html>
+            <body>
+                <h2>Persons Needing Home Care</h2>
+                <ul>
+                    <xsl:for-each select="CarePlatform/Person">
+                        <xsl:if test="Needs = 'Home Care'">
+                            <li><xsl:value-of select="Name"/></li>
+                        </xsl:if>
+                    </xsl:for-each>
+                </ul>
+            </body>
+        </html>
+    </xsl:template>
+</xsl:stylesheet>
