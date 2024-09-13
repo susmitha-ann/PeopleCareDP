@@ -1,0 +1,17 @@
+<!--Scenario 6: Transform Data to Another XML Format, 	Imagine a 6th scenario requiring the exploration of part of this data in another XML format and write a stylesheet for this-->
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+    <!-- Output method is XML -->
+    <xsl:output method="xml" indent="yes"/>
+    <!-- Root template -->
+    <xsl:template match="/">
+        <SimplePlatform>
+            <!-- Loop through each Service element -->
+            <xsl:for-each select="Platform/Service">
+                <ServiceSummary>
+                    <ServiceName><xsl:value-of select="ServiceName"/></ServiceName>
+                    <ProviderName><xsl:value-of select="Provider/ProviderName"/></ProviderName>
+                </ServiceSummary>
+            </xsl:for-each>
+        </SimplePlatform>
+    </xsl:template>
+</xsl:stylesheet>
