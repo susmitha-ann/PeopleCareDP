@@ -1,0 +1,30 @@
+<!--Scenario 5: List All Services and Their Participants-->
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+    <!-- Root template -->
+    <xsl:template match="/">
+        <html>
+            <body>
+                <h2>Services and Their Participants</h2>
+                <table border="1">
+                    <tr>
+                        <th>Service Name</th>
+                        <th>Participant</th>
+                    </tr>
+                    <!-- Loop through each Service -->
+                    <xsl:for-each select="Platform/Service">
+                        <tr>
+                            <td><xsl:value-of select="ServiceName"/></td>
+                            <!-- Add participants from a sample data field -->
+                            <td>
+                                <xsl:for-each select="Participants/Person">
+                                    <xsl:value-of select="concat(FirstName, ' ', LastName)"/>
+                                    <br/>
+                                </xsl:for-each>
+                            </td>
+                        </tr>
+                    </xsl:for-each>
+                </table>
+            </body>
+        </html>
+    </xsl:template>
+</xsl:stylesheet>
