@@ -1,0 +1,24 @@
+<!--Scenario 4: Schedule for a Person-->
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+    <xsl:template match="/">
+        <html>
+            <body>
+                <h2>Schedule for John Doe</h2>
+                <table border="1">
+                    <tr bgcolor="#9acd32">
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Service</th>
+                    </tr>
+                    <xsl:for-each select="CarePlatform/Schedule[PersonID='P001']">
+                        <tr>
+                            <td><xsl:value-of select="Date"/></td>
+                            <td><xsl:value-of select="Time"/></td>
+                            <td><xsl:value-of select="../Service[ServiceID=current()/ServiceID]/ServiceName"/></td>
+                        </tr>
+                    </xsl:for-each>
+                </table>
+            </body>
+        </html>
+    </xsl:template>
+</xsl:stylesheet>
