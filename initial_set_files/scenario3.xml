@@ -1,0 +1,18 @@
+<!--Scenario 3: Providers and Their Services-->
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+    <xsl:template match="/">
+        <html>
+            <body>
+                <h2>Providers and Their Services</h2>
+                <xsl:for-each select="CarePlatform/Provider">
+                    <h3><xsl:value-of select="Name"/></h3>
+                    <ul>
+                        <xsl:for-each select="../Service[ProviderID=current()/ProviderID]">
+                            <li><xsl:value-of select="ServiceName"/></li>
+                        </xsl:for-each>
+                    </ul>
+                </xsl:for-each>
+            </body>
+        </html>
+    </xsl:template>
+</xsl:stylesheet>
