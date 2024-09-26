@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Healthcare System Schedule - Transformed Data</title>
+    <style>
+        /* General styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        /* Header styling */
+        h1 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+        }
+
+        /* Person, Service, Provider, and Schedule details */
+        .schedule {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* Styling for person details */
+        .person {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2a7ca3;
+            margin-bottom: 10px;
+        }
+
+        /* Service details */
+        .service {
+            margin-bottom: 10px;
+        }
+
+        .service span {
+            font-weight: bold;
+        }
+
+        /* Provider details */
+        .provider {
+            margin-bottom: 10px;
+        }
+
+        .provider span {
+            font-weight: bold;
+        }
+
+        /* Schedule date and time styling */
+        .schedule-date-time {
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        .schedule-date-time span {
+            font-weight: bold;
+        }
+
+        /* Table structure for multiple entries */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #f4f4f4;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .schedule {
+                padding: 15px;
+            }
+
+            table {
+                font-size: 14px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>Healthcare System Schedule - Transformed Data</h1>
+
+    <!-- Schedule 1 -->
+    <div class="schedule">
+        <div class="person">John Doe (P001)</div>
+        <div class="service"><span>Service:</span> Wheelchair Assistance</div>
+        <div class="provider"><span>Provider:</span> Care Providers Inc., 1234 Elm St, Cityville</div>
+        <div class="schedule-date-time"><span>Date:</span> 2024-08-26 <span>Time:</span> 10:00 AM</div>
+    </div>
+
+    <!-- Schedule 2 -->
+    <div class="schedule">
+        <div class="person">Jane Smith (P002)</div>
+        <div class="service"><span>Service:</span> Home Care</div>
+        <div class="provider"><span>Provider:</span> Home Helpers, 5678 Oak St, Townsville</div>
+        <div class="schedule-date-time"><span>Date:</span> 2024-08-27 <span>Time:</span> 2:00 PM</div>
+    </div>
+
+</body>
+</html>
