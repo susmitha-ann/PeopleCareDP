@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<!-- ContactType Definition -->
+	<xs:complexType name="ContactType">
+		<xs:sequence>
+			<xs:element name="Name" type="xs:string" minOccurs="1"/>
+			<xs:element name="Email" type="xs:string" minOccurs="0"/>
+			<xs:element name="address" type="xs:string" minOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- typeOfSeekerType Definition -->
+	<xs:complexType name="typeOfSeekerType">
+		<xs:choice>
+			<xs:element name="Elderly" minOccurs="0" type="xs:string" nillable="true"/>
+			<xs:element name="Handicap">
+				<xs:complexType>
+					<xs:simpleContent>
+						<xs:extension base="xs:string">
+							<xs:attribute name="HandicapLevel" type="xs:string" default="High"/>
+							<!-- High , Medium , Low -->
+							<xs:attribute name="durationOfHandicap" type="xs:string" default="chronic"/>
+							<!-- chronic or acute -->
+						</xs:extension>
+					</xs:simpleContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="postPartum" type="xs:string"/>
+		</xs:choice>
+	</xs:complexType>
+	<!-- ProvidersType Definition-->
+	<xs:complexType name="ProvidersType">
+		<xs:choice>
+			<xs:element name="ServiceCompanies" type="CompaniesType" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="aloneProviders" type="AloneType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:choice>
+	</xs:complexType>
+	<!--CompaniesType Definition-->
+	<xs:complexType name="CompaniesType">
+		<xs:sequence>
+			<xs:element name="companieID" type="xs:string"/>
+			<!-- a key ref would be created here-->
+			<xs:element name="CompanieInfos" type="ContactType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!--AloneType Definition-->
+	<xs:complexType name="AloneType">
+		<xs:sequence>
+			<xs:element name="PhoneNumber" type="xs:integer"/>
+			<xs:element name="gender">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="Male"/>
+						<xs:enumeration value="Female"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!--ServiceType Definition-->
+	<xs:complexType name="ServiceType">
+		<xs:sequence>
+			<xs:element name="ServiceInfos" minOccurs="1" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="ServiceID" type="xs:string"/>
+						<xs:element name="ProviderID" type="xs:string"/>
+						<!--here i had issues with the db validation so i reconstructed the service type to match the db-->
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Description" type="xs:string"/>
+			<xs:element name="SCHEDULING" type="xs:date"/>
+		</xs:sequence>
+		<xs:attribute name="occurrence" type="xs:string" use="required"/>
+	</xs:complexType>
+	<!-- Also here i had to redefine the ActivityType to encapsulate every details of the activities otherwise the db won't be valid against the schema -->
+	<xs:complexType name="ActivityType">
+		<xs:sequence>
+			<xs:element name="ActivityInfo" minOccurs="1" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="ActivityID" type="xs:string"/>
+						<xs:element name="ProviderID" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Description" type="xs:string"/>
+			<xs:element name="SCHEDULING" type="xs:date"/>
+			<xs:element name="Duration" type="xs:duration"/>
+			<!--outpout: PnYnMnDTnHnMnS :P:period,year,month,day,hours,minutes,seconds-->
+		</xs:sequence>
+		<xs:attribute name="occurrence" type="xs:string" use="required"/>
+	</xs:complexType>
+	<!--ManagementSystem Element Definition-->
+	<xs:element name="ManagementSystem">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Users" type="UsersType" minOccurs="1" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+		<!--Defining the Keys -->
+		<xs:key name="userKey">
+			<xs:selector xpath="Users/AssistanceSeeker"/>
+			<xs:field xpath="SeekerID"/>
+		</xs:key>
+		<xs:key name="providerKey">
+			<xs:selector xpath="Users/HealthProviders"/>
+			<xs:field xpath="ProviderID"/>
+		</xs:key>
+		<xs:key name="serviceKey">
+			<xs:selector xpath="Services/*/ServiceInfos"/>
+			<xs:field xpath="ServiceID"/>
+		</xs:key>
+		<xs:key name="activityKey">
+			<xs:selector xpath="Activities/*/ActivityInfo"/>
+			<!--had to put the /*/ to match every activityID : done with chatgpt-->
+			<xs:field xpath="ActivityID"/>
+		</xs:key>
+		<!--Defining the Keyrefs-->
+		<!--Here i used chatgpt to correct where i put keyrefs, i had some errors at first but corrected them later -->
+		<xs:keyref name="SeekerRef" refer="userKey">
+			<xs:selector xpath="UserParticipation/entry"/>
+			<xs:field xpath="SeekerID"/>
+		</xs:keyref>
+		<xs:keyref name="ProviderRef" refer="providerKey">
+			<xs:selector xpath="UserParticipation/entry"/>
+			<xs:field xpath="ProviderID"/>
+		</xs:keyref>
+		<xs:keyref name="ServiceRef" refer="serviceKey">
+			<xs:selector xpath="UserParticipation/entry/ParticipationDateForServices"/>
+			<xs:field xpath="@ServiceID"/>
+		</xs:keyref>
+		<xs:keyref name="ActivityRef" refer="activityKey">
+			<xs:selector xpath="UserParticipation/entry"/>
+			<xs:field xpath="ActivityID"/>
+		</xs:keyref>
+		<xs:keyref name="ActivityProviderRef" refer="providerKey">
+			<xs:selector xpath="UserParticipation/entry"/>
+			<xs:field xpath="ActivityProviderID"/>
+		</xs:keyref>
+		<xs:keyref name="ServiceProviderRef" refer="providerKey">
+			<xs:selector xpath="UserParticipation/entry/ServiceProviderID"/>
+			<xs:field xpath="."/>
+		</xs:keyref>
+	</xs:element>
+	<!-- Defining UsersType-->
+	<xs:complexType name="UsersType">
+			<xs:sequence>
+				<xs:element name="AssistanceSeeker" type="AssistanceSeekerType" minOccurs="1" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	<!-- Defining AssistanceSeekerType-->
+	<xs:complexType name="AssistanceSeekerType">
+    <xs:sequence>
+        <xs:element name="SeekerID" type="xs:string"/>
+        <xs:element name="contactInfos" type="ContactType"/>
+        <xs:element name="age">
+            <xs:complexType>
+                <xs:simpleContent>
+                    <xs:extension base="xs:int">
+                        <xs:attribute name="ageUnit" type="xs:string" default="Years"/>
+                    </xs:extension>
+                </xs:simpleContent>
+            </xs:complexType>
+        </xs:element>
+        <xs:element name="gender">
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="Male"/>
+                    <xs:enumeration value="Female"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:element>
+        <xs:element name="typeOfSeeker" type="typeOfSeekerType"/>
+        <xs:element name="HealthProviders" type="HealthProvidersType" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element name="Services" type="ServicesType" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element name="Activities" type="ActivitiesType" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element name="UserParticipation" type="UserParticipationType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+</xs:complexType>
+
+	<!-- Defining HealthProvidersType-->
+<xs:complexType name="HealthProvidersType">
+    <xs:sequence>
+        <xs:element name="ProviderID" type="xs:string"/>
+        <xs:element name="providerInfos" type="ContactType"/>
+        <xs:element name="TypeOfHealthProviders" type="ProvidersType"/>
+    </xs:sequence>
+</xs:complexType>
+
+<!-- Defining ServicesType-->
+	<xs:complexType name="ServicesType">
+			<xs:choice maxOccurs="unbounded">   <!-- i had to change sequence to choice to allow multiple elements to appear in any order-->
+				<xs:element name="MedicalCare" type="ServiceType" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="HomeCare" type="ServiceType" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="HomeRehabilitation" type="ServiceType" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element name="Postpartum-NeonatalCARE" type="ServiceType" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:choice>
+		</xs:complexType>
+		<!-- Defining ActivitiesType-->
+	<xs:complexType name="ActivitiesType">
+		<xs:sequence>
+			<xs:choice>
+				<xs:element name="ElderlyActivities" type="ActivityType" minOccurs="0"/>
+				<xs:element name="WithHandicapActivities" type="ActivityType" minOccurs="0"/>
+				<xs:element name="RehabActivities" type="ActivityType" minOccurs="0"/>
+				<xs:element name="PostnatalAcitvities" type="ActivityType" minOccurs="0"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	<!--UserParticipationType Definition-->
+	<xs:complexType name="UserParticipationType">
+		<xs:sequence>
+			<xs:element name="entry" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:choice maxOccurs="unbounded">
+						<xs:element name="ServiceProviderID" type="xs:string" minOccurs="1" maxOccurs="unbounded"/>
+						<xs:element name="ActivityProviderID" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+						<xs:element name="SeekerID" type="xs:string" minOccurs="1"/>
+						<xs:element name="ActivityID" type="xs:string" minOccurs="0"/>
+						<xs:element name="ParticipationDateForActivities" type="xs:date" minOccurs="1" maxOccurs="unbounded"/>
+						<!-- Correcting ParticipationDateForServices -->
+						<xs:element name="ParticipationDateForServices" minOccurs="1" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:simpleContent>
+									<xs:extension base="xs:date">
+										<xs:attribute name="ServiceID" type="xs:string" use="required"/>
+									</xs:extension>
+								</xs:simpleContent>
+							</xs:complexType>
+						</xs:element>
+					</xs:choice>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>
+
