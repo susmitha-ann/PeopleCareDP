@@ -1,0 +1,11 @@
+#providersTable thead {
+  background-color: #4CAF50;
+  color: white;
+}
+h1 {
+  color: darkgreen; /* Changes the color of heading to green */
+}
+table {
+  max-width: 80%; /* resize the table */
+  min-width: 500px; 
+}

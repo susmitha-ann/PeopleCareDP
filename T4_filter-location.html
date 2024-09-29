@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="T4_filter-location.css">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filter Providers by City</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Health Providers Filtered by City</h1>
+
+    <label for="city">Select City:</label>
+    <select id="city" onchange="filterProviders()">
+        <option value="">All</option>
+        <option value="Boston">Boston</option>
+        <option value="Pasadena">Pasadena</option>
+        <option value="Kingston">Kingston</option>
+        <option value="Atlanta">Atlanta</option>
+        <option value="Washington Street">Washington Street</option>
+		<option value="Berkeley">Berkeley</option>
+		<option value="Atlanta">Atlanta</option>
+		<option value="Chelsea">Chelsea</option>
+		<option value="Pomona">Pomona</option>
+		<option value="Pacoima">Pacoima</option>
+		<option value="Mammoth Lakes">Mammoth Lakes</option>
+    </select>
+
+    <table id="providersTable">
+        <thead>
+            <tr>
+                <th>Provider Name</th>
+                <th>Email</th>
+                <th>Street</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Zipcode</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+            <!-- Provider data will be dynamically inserted here -->
+        </tbody>
+    </table>
+
+    <script>
+        // Function to load XML data from normalization_output.xml
+        function loadXMLData(callback) {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "T4_normalization_output.xml", true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    callback(xhr.responseXML);
+                }
+            };
+            xhr.send();
+        }
+
+        // Function to filter providers by city
+        function filterProviders() {
+            const city = document.getElementById("city").value;
+            const tableBody = document.getElementById("tableBody");
+            tableBody.innerHTML = ''; // Clear previous table content
+
+            loadXMLData(function (xml) {
+                const providers = xml.getElementsByTagName("HealthProviders");
+                
+                for (let i = 0; i < providers.length; i++) {
+                    const provider = providers[i];
+                    const cityElement = provider.getElementsByTagName("city")[0];
+                    const providerCity = cityElement ? cityElement.textContent.trim() : '';
+
+                    if (city === '' || providerCity === city) {
+                        const name = provider.getElementsByTagName("Name")[0].textContent;
+                        const email = provider.getElementsByTagName("Email")[0].textContent;
+                        const street = provider.getElementsByTagName("street")[0].textContent;
+                        const state = provider.getElementsByTagName("state")[0].textContent;
+                        const zipcode = provider.getElementsByTagName("zipcode")[0].textContent;
+
+                        // Create a new row
+                        const row = `<tr>
+                            <td>${name}</td>
+                            <td>${email}</td>
+                            <td>${street}</td>
+                            <td>${providerCity}</td>
+                            <td>${state}</td>
+                            <td>${zipcode}</td>
+                        </tr>`;
+
+                        tableBody.innerHTML += row;
+                    }
+                }
+            });
+        }
+
+        // Load all providers initially
+        window.onload = filterProviders;
+    </script>
+</body>
+</html>

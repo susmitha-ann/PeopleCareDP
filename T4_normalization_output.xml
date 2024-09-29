@@ -1,0 +1,170 @@
+<ManagementSystem>
+  <AssistanceSeeker>
+    <SeekerID>AS589</SeekerID>
+    <contactInfos>
+      <Name>William Smith</Name>
+      <Email>willy221@gmail.com</Email>
+      <address>
+        <street>31 Rose Street</street>
+        <city> Kingston</city>
+        <state> NY</state>
+        <zipcode> 12401</zipcode>
+      </address>
+    </contactInfos>
+    <age ageUnit="">65</age>
+    <gender>Male</gender>
+    <typeOfSeeker>Senior</typeOfSeeker>
+  </AssistanceSeeker>
+  <AssistanceSeeker>
+    <SeekerID>AS398</SeekerID>
+    <contactInfos>
+      <Name>Margaret Wilson</Name>
+      <Email/>
+      <address>
+        <street>12 Peachtree Street</street>
+        <city> Atlanta</city>
+        <state> Georgia</state>
+        <zipcode> 30033</zipcode>
+      </address>
+    </contactInfos>
+    <age ageUnit="">55</age>
+    <gender>Female</gender>
+    <typeOfSeeker>Post-stroke sequelae</typeOfSeeker>
+  </AssistanceSeeker>
+  <AssistanceSeeker>
+    <SeekerID>AS625</SeekerID>
+    <contactInfos>
+      <Name>James Brown</Name>
+      <Email>Jamy.BY@gmail.com</Email>
+      <address>
+        <street>4TH Avenue</street>
+        <city> Washington Street</city>
+        <state> NY</state>
+        <zipcode> 12514</zipcode>
+      </address>
+    </contactInfos>
+    <age ageUnit="">32</age>
+    <gender>Male</gender>
+    <typeOfSeeker>Residual Symptoms following a Road Accident</typeOfSeeker>
+  </AssistanceSeeker>
+  <AssistanceSeeker>
+    <SeekerID>AS780</SeekerID>
+    <contactInfos>
+      <Name>Sandra Noles James</Name>
+      <Email>Sandra.Njames02@hotmail.com</Email>
+      <address>
+        <street>Oak Avenue</street>
+        <city> Pasadena</city>
+        <state> CA</state>
+        <zipcode> 91107</zipcode>
+      </address>
+    </contactInfos>
+    <age ageUnit="">28</age>
+    <gender>Female</gender>
+    <typeOfSeeker>Postpartum Doula Support and Help with Lactation</typeOfSeeker>
+  </AssistanceSeeker>
+  <HealthProviders>
+    <ProviderID>HP784</ProviderID>
+    <providerInfos>
+      <Name>Catherine Martin</Name>
+      <Email>catherine.Mt@agingCorp.com</Email>
+      <address>
+        <street>10 Bowdoin Street</street>
+        <city> Boston</city>
+        <state> Massachusetts</state>
+        <zipcode> 02108</zipcode>
+      </address>
+    </providerInfos>
+  </HealthProviders>
+  <HealthProviders>
+    <ProviderID>HP795</ProviderID>
+    <providerInfos>
+      <Name>Alain Moore</Name>
+      <Email>Alain.Mr@agingCorp.com</Email>
+      <address>
+        <street>30 Aberdeen Street</street>
+        <city> Boston</city>
+        <state> Massachusetts</state>
+        <zipcode> 02108</zipcode>
+      </address>
+    </providerInfos>
+  </HealthProviders>
+  <HealthProviders>
+    <ProviderID>HP886</ProviderID>
+    <providerInfos>
+      <Name>Alain Moore</Name>
+      <Email>Alain.Mr@agingCorp.com</Email>
+      <address>
+        <street>30 Aberdeen Street</street>
+        <city> Boston</city>
+        <state> Massachusetts</state>
+        <zipcode> 02108</zipcode>
+      </address>
+    </providerInfos>
+  </HealthProviders>
+  <HealthProviders>
+    <ProviderID>HP105</ProviderID>
+    <providerInfos>
+      <Name>Suzana Hernandez</Name>
+      <Email>suzy.her@hotmail.com</Email>
+      <address>
+        <street>10th Street NW </street>
+        <city> Atlanta</city>
+        <state> Georgia</state>
+        <zipcode> 30318</zipcode>
+      </address>
+    </providerInfos>
+  </HealthProviders>
+  <HealthProviders>
+    <ProviderID>HP222</ProviderID>
+    <providerInfos>
+      <Name>redBrainAssociation</Name>
+      <Email>michaelZ.association@redBrain.org</Email>
+      <address>
+        <street>5th Avenue RZ</street>
+        <city> Atlanta </city>
+        <state> Georgia</state>
+        <zipcode> 30318</zipcode>
+      </address>
+    </providerInfos>
+  </HealthProviders>
+  <HealthProviders>
+    <ProviderID>HP9144</ProviderID>
+    <providerInfos>
+      <Name>Adam Raley</Name>
+      <Email>Adam.Raley@MyRehab.com</Email>
+      <address>
+        <street>5th Avenue</street>
+        <city> Washington Street </city>
+        <state> NY</state>
+        <zipcode> 12514</zipcode>
+      </address>
+    </providerInfos>
+  </HealthProviders>
+  <HealthProviders>
+    <ProviderID/>
+    <providerInfos>
+      <Name>Anna Dawson</Name>
+      <Email>Anna.Dawson@NewGarden.com</Email>
+      <address>
+        <street>Pearl Street</street>
+        <city> Pomona </city>
+        <state> CA</state>
+        <zipcode> 91768</zipcode>
+      </address>
+    </providerInfos>
+  </HealthProviders>
+  <HealthProviders>
+    <ProviderID>HP354</ProviderID>
+    <providerInfos>
+      <Name>Patricia Gareth</Name>
+      <Email>Patricia.GA@happyCare.com</Email>
+      <address>
+        <street> Avis Road</street>
+        <city> Berkeley</city>
+        <state> CA</state>
+        <zipcode> 94710 </zipcode>
+      </address>
+    </providerInfos>
+  </HealthProviders>
+</ManagementSystem>
