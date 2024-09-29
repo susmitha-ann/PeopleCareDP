@@ -1,4 +1,5 @@
 {
+    "$schema": "https://example.com/HealthDatabase.schema.json",
     "HealthProviders": [
         {
             "ProviderID": "HP784",

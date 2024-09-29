@@ -4,7 +4,8 @@
 	<!-- Root template -->
 	<xsl:template match="/">
         {
-            "HealthProviders": [
+            "$schema": "https://example.com/HealthDatabase.schema.json",
+			"HealthProviders": [
                 <xsl:for-each select="ManagementSystem/Users/AssistanceSeeker/HealthProviders">
                     {
                         "ProviderID": "<xsl:value-of select='ProviderID'/>",
@@ -16,20 +17,22 @@
                         "TypeOfHealthProviders": {
                             <xsl:choose>
 				<xsl:when test="TypeOfHealthProviders/ServiceCompanies">
+					<xsl:variable name="Companies" select="TypeOfHealthProviders/ServiceCompanies"/>
 									
                                     "ServiceCompanies": {
-										"companieID": "<xsl:value-of select='TypeOfHealthProviders/ServiceCompanies/companieID'/>",
+										"companieID": "<xsl:value-of select='$Companies/companieID'/>",
 										"CompanieInfos": {
-											"Name": "<xsl:value-of select='TypeOfHealthProviders/ServiceCompanies/CompanieInfos/Name'/>",
-											"Email": "<xsl:value-of select='TypeOfHealthProviders/ServiceCompanies/CompanieInfos/Email'/>",
-											"address": "<xsl:value-of select='TypeOfHealthProviders/ServiceCompanies/CompanieInfos/address'/>"
+											"Name": "<xsl:value-of select='$Companies/CompanieInfos/Name'/>",
+											"Email": "<xsl:value-of select='$Companies/CompanieInfos/Email'/>",
+											"address": "<xsl:value-of select='$Companies/CompanieInfos/address'/>"
 										}
 									}
                                 </xsl:when>
 				<xsl:when test="TypeOfHealthProviders/aloneProviders">
+					<xsl:variable name="independent" select="TypeOfHealthProviders/aloneProviders"/>
                                     "aloneProviders": {
-                                        "PhoneNumber": "<xsl:value-of select='TypeOfHealthProviders/aloneProviders/PhoneNumber'/>",
-                                        "gender": "<xsl:value-of select='TypeOfHealthProviders/aloneProviders/gender'/>"
+                                        "PhoneNumber": "<xsl:value-of select='$independent/PhoneNumber'/>",
+                                        "gender": "<xsl:value-of select='$independent/gender'/>"
                                     }
                                 </xsl:when>
 				<!-- Add more cases here if there are other types of providers -->
