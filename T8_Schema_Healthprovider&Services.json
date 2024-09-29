@@ -1,0 +1,172 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "$id": "https://example.com/HealthDatabase.schema.json",
+    "title": "ManagementSystem",
+    "description": "This schema is based to the JSON file which exploit a part of our health management sysment",
+    "type": "object",
+    "properties": {
+        "HealthProviders": {
+            "description": "This array tracks all health providers available in the JSON document only",
+            "type": "array",
+            "items": {
+                "description": "provide details about each health provider",
+                "type": "object",
+                "properties": {
+                    "ProviderID": {
+                        "description": "ID",
+                        "type": "string"
+                    },
+                    "providerInfos": {
+                        "description": "Provides contact info of the individual who providers including the name",
+                        "type": "object",
+                        "properties": {
+                            "Name": {
+                                "type": "string"
+                            },
+                            "Email": {
+                                "type": "string",
+                                "description": "Valid email address"
+                            },
+                            "address": {
+                                "description": "Address of the health provider",
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "Name",
+                            "Email",
+                            "address"
+                        ]
+                    },
+                    "TypeOfHealthProviders": {
+                        "description": "provide information on the type of health provider, either a company or an individual",
+                        "type": "object",
+                        "properties": {
+                            "ServiceCompanies": {
+                                "description": "Company information in which the indivual providers work",
+                                "type": "object",
+                                "properties": {
+                                    "companieID": {
+                                        "description": "identifier for the service company",
+                                        "type": "string"
+                                    },
+                                    "CompanieInfos": {
+                                        "description": "Contact info of the service company",
+                                        "type": "object",
+                                        "properties": {
+                                            "Name": {
+                                                "type": "string"
+                                            },
+                                            "Email": {
+                                                "type": "string",
+                                                "description": "email address for the service company"
+                                            },
+                                            "address": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "required": [
+                                            "Name",
+                                            "Email",
+                                            "address"
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "companieID",
+                                    "CompanieInfos"
+                                ]
+                            },
+                            "aloneProviders": {
+                                "description": "Details of individual health providers on their own",
+                                "type": "object",
+                                "properties": {
+                                    "PhoneNumber": {
+                                        "type": "string"
+                                    },
+                                    "gender": {
+                                        "type": "string",
+                                        "enum": [
+                                            "Male",
+                                            "Female"
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "PhoneNumber",
+                                    "gender"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "required": [
+                    "ProviderID",
+                    "providerInfos",
+                    "TypeOfHealthProviders"
+                ]
+            }
+        },
+        "Services": {
+            "description": "This array help to keep a track on the type of health services provided",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "description": " information on each service provided",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "HomeCare",
+                            "MedicalCare",
+                            "HomeRehabilitation",
+                            "Postpartum-NeonatalCARE"
+                        ]
+                    },
+                    "occurrence": {
+                        "description": "How often the service is needed",
+                        "type": "string"
+                    },
+                    "ServiceInfos": {
+                        "description": "Details of the service and the health provider",
+                        "type": "object",
+                        "properties": {
+                            "ServiceID": {
+                                "description": "A unique identifier for the service",
+                                "type": "string"
+                            },
+                            "ProviderID": {
+                                "description": " this refers to the one of the above HealthProvider",
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "ServiceID",
+                            "ProviderID"
+                        ]
+                    },
+                    "Description": {
+                        "description": "Description of the service",
+                        "type": "string"
+                    },
+                    "SCHEDULING": {
+                        "description": "Date on which the service is scheduled",
+                        "type": "string",
+                        "format": "date"
+                    }
+                },
+                "required": [
+                    "type",
+                    "occurrence",
+                    "ServiceInfos",
+                    "Description",
+                    "SCHEDULING"
+                ]
+            }
+        }
+    },
+    "required": [
+        "HealthProviders",
+        "Services"
+    ]
+}
