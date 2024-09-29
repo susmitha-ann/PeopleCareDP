@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<AssistanceData>
+<Seeker>
+<Name>William Smith</Name>
+<Age>65</Age>
+<Provider>
+<Name>Catherine Martin</Name>
+<ServiceType>Other Services</ServiceType>
+</Provider>
+<Provider>
+<Name>Alain Moore</Name>
+<ServiceType>Other Services</ServiceType>
+</Provider>
+<Provider>
+<Name>John Davis</Name>
+<ServiceType>Other Services</ServiceType>
+</Provider>
+</Seeker>
+<Seeker>
+<Name>Margaret Wilson</Name>
+<Age>55</Age>
+<Provider>
+<Name>Suzana Hernandez</Name>
+<ServiceType>Other Services</ServiceType>
+</Provider>
+<Provider>
+<Name>redBrainAssociation</Name>
+<ServiceType>Other Services</ServiceType>
+</Provider>
+</Seeker>
+<Seeker>
+<Name>James Brown</Name>
+<Age>32</Age>
+<Provider>
+<Name>Adam Raley</Name>
+<ServiceType>Other Services</ServiceType>
+</Provider>
+</Seeker>
+<Seeker>
+<Name>Sandra Noles James</Name>
+<Age>28 </Age>
+<Provider>
+<Name>Anna Dawson</Name>
+<ServiceType>Other Services</ServiceType>
+</Provider>
+<Provider>
+<Name>Patricia Gareth</Name>
+<ServiceType>Other Services</ServiceType>
+</Provider>
+</Seeker>
+</AssistanceData>
